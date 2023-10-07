@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import clsx from 'clsx'
-
+import {FaRegCopy,FaCheck} from 'react-icons/fa'
 const buttonClasses = 'flex items-center text-xs font-medium text-white rounded'
 
 export function CopyButton({ text, className }:any) {
@@ -16,7 +16,7 @@ export function CopyButton({ text, className }:any) {
         }, 2500)
     }
 
-    // const Icon = isCopied ? CheckIcon : ClipboardIcon
+    const Icon = isCopied ? FaCheck : FaRegCopy
 
     return (
         <button
@@ -24,7 +24,7 @@ export function CopyButton({ text, className }:any) {
             onClick={copy}
             className={clsx(buttonClasses, className)}
         >
-            {/*<Icon className="mr-1 h-4 w-4" />*/}
+            <Icon className="mr-1 h-4 w-4" />
             <span>{isCopied ? 'Copied!' : 'Copy'}</span>
         </button>
     )
