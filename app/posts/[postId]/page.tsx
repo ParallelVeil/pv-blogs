@@ -3,7 +3,7 @@ import { getPostsMeta, getPostByName } from "@/lib/posts"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import 'highlight.js/styles/github-dark.css'
-import "@/app/components/rehype-code-title.css"
+import "@/app/components/rehype-code.css"
 
 export const revalidate = 3600
 

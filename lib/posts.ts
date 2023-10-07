@@ -1,6 +1,5 @@
 import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings/lib'
-import rehypeHighlight from 'rehype-highlight/lib'
 import rehypeSlug from 'rehype-slug'
 import Video from '@/app/components/Video'
 import CustomImage from '@/app/components/CustomImage'
@@ -10,6 +9,7 @@ import {Note} from "@/app/components/Note";
 import rehypeBlockquote from "@/lib/rehypeExtend/rehype-blockquote-meta";
 import {postProcess, preProcess} from "@/lib/rehypeExtend/rehype-pre-raw";
 import {Pre} from "@/app/components/Pre";
+import rehypePrism from 'rehype-prism-plus'
 
 type Filetree = {
     "tree": [
@@ -40,7 +40,8 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
             Video,
             CustomImage,
             blockquote:Note,
-            pre:Pre
+            pre:Pre,
+            img:CustomImage,
         },
         options: {
             parseFrontmatter: true,
@@ -48,7 +49,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
                 rehypePlugins: [
                     preProcess,
                     rehypeCodeTitles,
-                    rehypeHighlight,
+                    rehypePrism,
                     rehypeBlockquote,
                     rehypeSlug,
                     [rehypeAutolinkHeadings, {
