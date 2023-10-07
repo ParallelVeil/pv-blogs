@@ -4,7 +4,6 @@ import rehypeHighlight from 'rehype-highlight/lib'
 import rehypeSlug from 'rehype-slug'
 import Video from '@/app/components/Video'
 import CustomImage from '@/app/components/CustomImage'
-import CodeBlock from "@/app/components/CodeBlock";
 import {checkAST} from "@/lib/rehypeExtend/rehype-check";
 import rehypeCodeTitles from "rehype-code-titles";
 import {Note} from "@/app/components/Note";
@@ -40,7 +39,6 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
         components: {
             Video,
             CustomImage,
-            code:CodeBlock,
             blockquote:Note,
             pre:Pre
         },
