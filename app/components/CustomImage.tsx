@@ -8,7 +8,7 @@ type Props = {
 
 export default function CustomImage({ src, alt, priority }: any) {
     if (src.startsWith("images/") || src.startsWith("/images/") || src.startsWith("./images/")) {
-        src = `http://localhost:3000/api${src.replace(/^\.*\/?images\//, '/')}`;
+        src = `http://localhost:3000/api/images${src.replace(/^\.*\/?images\//, '/')}`;
     }
     return (
         <div className="w-full h-full">

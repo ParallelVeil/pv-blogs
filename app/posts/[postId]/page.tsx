@@ -5,7 +5,7 @@ import Link from "next/link"
 import 'highlight.js/styles/github-dark.css'
 import "@/app/components/rehype-code.css"
 
-export const revalidate = 3600
+export const revalidate = 86400
 
 type Props = {
     params: {

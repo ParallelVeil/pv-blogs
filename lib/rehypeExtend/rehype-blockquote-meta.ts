@@ -1,15 +1,16 @@
 import {visit} from 'unist-util-visit'
-import {Node} from "unist";
+import {Node,Parent} from "unist";
+import {isElement} from "hast-util-is-element";
 
 export default function rehypeBlockquote() {
     return function transformer(tree: Node) {
         const visitor = (
-            node: any,
+            node: Node,
             index: number,
-            parent: any
+            parent: Parent
         ) => {
             // If it's not a blockquote, do nothing
-            if (!parent || node.tagName !== 'blockquote') {
+            if (!parent || !isElement(node, "blockquote")) {
                 return
             }
             const blockquote = node;

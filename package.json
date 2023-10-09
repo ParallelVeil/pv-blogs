@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clsx": "^2.0.0",
+    "hast-util-is-element": "^3.0.0",
     "highlight.js": "11.8.0",
     "next": "13.5.4",
     "next-mdx-remote": "^4.4.1",
@@ -21,6 +22,7 @@
     "rehype-code-titles": "^1.2.0",
     "rehype-prism-plus": "^1.6.3",
     "rehype-slug": "^6.0.0",
+    "unified": "^11.0.3",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

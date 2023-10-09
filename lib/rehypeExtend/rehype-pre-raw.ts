@@ -1,20 +1,23 @@
-import { visit } from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {Node} from "unist";
-export const preProcess = () => (tree:Node) => {
-    visit(tree, (node:any) => {
-        if (node?.type === 'element' && node?.tagName === 'pre') {
+import {isElement} from "hast-util-is-element";
+import assert from "assert";
+
+export const preProcess = () => (tree: Node) => {
+    visit(tree, 'element', (node: Node) => {
+        if (isElement(node, 'pre')) {
             const [codeEl] = node.children
-
-            if (codeEl.tagName !== 'code') return
-
+            if (!isElement(codeEl, 'code')) return
+            // @ts-ignore
             node.raw = codeEl.children?.[0].value
         }
     })
 }
 
-export const postProcess = () => (tree:Node) => {
-    visit(tree, 'element', (node:any) => {
-        if (node?.type === 'element' && node?.tagName === 'pre') {
+export const postProcess = () => (tree: Node) => {
+    visit(tree, 'element', (node: Node) => {
+        if (isElement(node, 'pre')) {
+            // @ts-ignore
             node.properties['raw'] = node.raw
             // console.log(node) here to see if you're getting the raw text
         }
