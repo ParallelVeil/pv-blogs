@@ -14,7 +14,6 @@ export default function rehypeBlockquote() {
                 return
             }
             const blockquote = node;
-            console.log('blockquote', blockquote)
 
             const children = blockquote?.children?.reduce((memo: any, child: any) => {
                 if (child.type !== 'element') {

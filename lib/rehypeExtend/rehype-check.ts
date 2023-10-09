@@ -1,10 +1,9 @@
 import {visit} from "unist-util-visit";
-import {Plugin} from "unified";
 import {Node, Parent} from "unist";
 
 
-export const checkAST: Plugin = (option = {}) => {
-    return (tree) => {
+export function checkAST (option = {}) {
+    return (tree:Node) => {
         const visitor = (
             node: Node,
             index: number,

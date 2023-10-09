@@ -10,6 +10,7 @@ import rehypeBlockquote from "@/lib/rehypeExtend/rehype-blockquote-meta";
 import {postProcess, preProcess} from "@/lib/rehypeExtend/rehype-pre-raw";
 import {Pre} from "@/app/components/Pre";
 import rehypePrism from 'rehype-prism-plus'
+import rehypeBlockquoteSRS from "@/lib/rehypeExtend/rehype-blockquote-srs";
 
 type Filetree = {
     "tree": [
@@ -33,7 +34,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
     const rawMDX = await res.text()
 
     if (rawMDX === '404: Not Found') return undefined
-
+    console.log(`render:${fileName}`)
     const { frontmatter, content } = await compileMDX<{ title: string, date: string, tags: string[] }>({
         source: rawMDX,
         components: {
@@ -50,13 +51,14 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
                     preProcess,
                     rehypeCodeTitles,
                     rehypePrism,
+                    rehypeBlockquoteSRS,
                     rehypeBlockquote,
                     rehypeSlug,
                     [rehypeAutolinkHeadings, {
                         behavior: 'wrap'
                     }],
                     postProcess,
-                    checkAST
+                    // checkAST
                 ],
             },
         }
