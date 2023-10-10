@@ -1,0 +1,7 @@
+blockquote p::before{
+    content:none!important;
+}
+
+blockquote p::after{
+    content:none!important;
+}

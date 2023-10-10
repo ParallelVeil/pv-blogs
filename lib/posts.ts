@@ -51,8 +51,8 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
                     preProcess,
                     rehypeCodeTitles,
                     rehypePrism,
-                    rehypeBlockquoteSRS,
                     rehypeBlockquote,
+                    rehypeBlockquoteSRS,
                     rehypeSlug,
                     [rehypeAutolinkHeadings, {
                         behavior: 'wrap'

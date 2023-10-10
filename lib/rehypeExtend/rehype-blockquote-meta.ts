@@ -1,5 +1,5 @@
 import {visit} from 'unist-util-visit'
-import {Node,Parent} from "unist";
+import {Node, Parent} from "unist";
 import {isElement} from "hast-util-is-element";
 
 export default function rehypeBlockquote() {
@@ -16,28 +16,22 @@ export default function rehypeBlockquote() {
             const blockquote = node;
 
             const children = blockquote?.children?.reduce((memo: any, child: any) => {
-                if (child.type !== 'element') {
-                    memo.push(child);
-                    return memo;
-                }
-
-                for (const c of child.children) {
-                    if (c.type === 'text') {
-                        const res = /^([^\:]+)\:"([^"]+)/gi.exec(c.value);
-
-                        if (res && res.length) {
-                            const color = res[1];
-                            const title = res[2];
-
-                            blockquote.properties['dataBqColor'] = color;
-                            blockquote.properties['dataBqTitle'] = title;
-                            c.value = c.value.replace(/^([^\:]+)\:"([^"]+)"\s/gi, '')
+                if (child.type === 'element') {
+                    for (const c of child.children) {
+                        if (c.type === 'text') {
+                            const res = /^([^\:]+)\:"([^"]+)/gi.exec(c.value);
+                            if (res && res.length) {
+                                const color = res[1];
+                                const title = res[2];
+                                blockquote.properties['dataBqColor'] = color;
+                                blockquote.properties['dataBqTitle'] = title;
+                                c.value = c.value.replace(/^([^\:]+)\:"([^"]+)"\s/gi, '')
+                            }
                         }
                     }
-
-                    memo.push(c);
                 }
 
+                memo.push(child);
                 return memo;
             }, []);
 
