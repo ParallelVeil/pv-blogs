@@ -12,9 +12,19 @@ type Props = {
 export function Note({
                          'data-bq-color': color,
                          'data-bq-title': title,
+                         'data-question': question,
+                         'data-answer': answer,
+                         'data-SRS': SRS,
                          children,
                      }: any) {
 
+    if(SRS){
+        console.log({
+            question,
+            answer,
+            SRS
+        })
+    }
     if (!color) {
         return <blockquote>{children}</blockquote>
     }
