@@ -1,11 +1,11 @@
-import getFormattedDate from "@/lib/getFormattedDate"
 import { getPostsMeta, getPostByName } from "@/lib/posts"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import 'highlight.js/styles/github-dark.css'
 import "@/app/components/rehype-code.css"
+import DateHandler from "@/app/context/DateContext"
 
-export const revalidate = 86400
+export const revalidate = 10
 
 type Props = {
     params: {
@@ -46,17 +46,17 @@ export default async function Post({ params: { postId } }: Props) {
 
     const { meta, content } = post
 
-    const pubDate = getFormattedDate(meta.date)
+    const pubDate = meta.date
 
     const tags = meta.tags.map((tag, i) => (
         <Link key={i} href={`/tags/${tag}`}>{tag}</Link>
     ))
 
     return (
-        <>
+        <DateHandler>
             <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
             <p className="mt-0 text-sm">
-                {pubDate}
+                <span className={"formatDate"} data-time={pubDate}>{pubDate}</span>
             </p>
             <article>
                 {content}
@@ -70,6 +70,6 @@ export default async function Post({ params: { postId } }: Props) {
             <p className="mb-10">
                 <Link href="/">← Back to home</Link>
             </p>
-        </>
+        </DateHandler>
     )
 }

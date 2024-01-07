@@ -1,6 +1,7 @@
 import { getPostsMeta } from "@/lib/posts"
 import ListItem from "@/app/components/ListItem"
 import Link from "next/link"
+import DateHandler from "@/app/context/DateContext";
 
 export const revalidate = 86400
 
@@ -44,7 +45,7 @@ export default async function TagPostList({ params: { tag } }: Props) {
     }
 
     return (
-        <>
+        <DateHandler>
             <h2 className="text-3xl mt-4 mb-0">Results for: #{tag}</h2>
             <section className="mt-6 mx-auto max-w-2xl">
                 <ul className="w-full list-none p-0">
@@ -53,6 +54,6 @@ export default async function TagPostList({ params: { tag } }: Props) {
                     ))}
                 </ul>
             </section>
-        </>
+        </DateHandler>
     )
 }
