@@ -101,3 +101,11 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
 
     return posts.sort((a, b) => a.date < b.date ? 1 : -1)
 }
+
+
+export async function getPostTags():Promise<string[]> {
+    const posts = await getPostsMeta() 
+    if (!posts) return []
+    const tags = new Set(posts.map(post => post.tags).flat())
+    return Array.from(tags)
+}

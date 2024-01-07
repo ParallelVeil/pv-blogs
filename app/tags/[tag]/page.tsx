@@ -1,4 +1,4 @@
-import { getPostsMeta } from "@/lib/posts"
+import { getPostTags, getPostsMeta } from "@/lib/posts"
 import ListItem from "@/app/components/ListItem"
 import Link from "next/link"
 import DateHandler from "@/app/context/DateContext";
@@ -12,13 +12,9 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-    const posts = await getPostsMeta() //deduped!
+    const tags = await getPostTags() //deduped!
 
-    if (!posts) return []
-
-    const tags = new Set(posts.map(post => post.tags).flat())
-
-    return Array.from(tags).map((tag) => ({ tag }))
+    return tags.map((tag) => ({ tag }))
 }
 
 export function generateMetadata({ params: { tag } }: Props) {

@@ -1,20 +1,42 @@
-import Link from "next/link"
-import {FaGithub} from "react-icons/fa"
+import Link from "next/link";
+import ExtendICO from "./ExtendICO";
+import { getPostTags } from "@/lib/posts";
+import TagList from "./TagList";
 
-export default function Navbar() {
-    return (
-        <nav className="bg-slate-600 p-4 sticky top-0 drop-shadow-xl z-10">
-            <div className="md:px-6 prose prose-xl mx-auto flex justify-between flex-col sm:flex-row">
-                <h1 className="text-3xl font-bold text-white grid place-content-center mb-2 md:mb-0">
-                    <Link href="/" className="text-white/90 no-underline hover:text-white">ishiko 732</Link>
-                </h1>
-                <div
-                    className="flex flex-row justify-center sm:justify-evenly align-middle gap-4 text-white text-4xl lg:text-5xl">
-                    <Link className="text-white/90 hover:text-white" href="https://github.com/ishiko732">
-                        <FaGithub/>
-                    </Link>
-                </div>
-            </div>
-        </nav>
-    )
+export default async function Navbar() {
+  const tags = await getPostTags();
+
+  return (
+    <nav className="navbar bg-base-100">
+      <div className="navbar-start">
+        <Link href={"/"} className="btn btn-ghost text-xl">{`blogs`}</Link>
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link href={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link href={"/posts"}>Blogs</Link>
+          </li>
+          {tags.length > 0 ? (
+            <li>
+              <details className="dropdown">
+                <summary id="tags">Tags</summary>
+                <ul>
+                  <TagList tags={tags} />
+                </ul>
+              </details>
+            </li>
+          ) : null}
+          <li>
+            <Link href={"/about"}>About</Link>
+          </li>
+        </ul>
+      </div>
+      <div className="navbar-end">
+        <ExtendICO />
+      </div>
+    </nav>
+  );
 }
