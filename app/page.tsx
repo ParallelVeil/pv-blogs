@@ -15,7 +15,7 @@ export default function Home() {
           {`I'm `}<span className="font-bold">ishiko</span>.
         </span>
                 </p>
-                <Posts/>
+                <Posts limit={3}/>
             </div>
         </DateHandler>
     )
