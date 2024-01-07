@@ -23,7 +23,7 @@ export default async function Navbar() {
             <li>
               <details className="dropdown">
                 <summary id="tags">Tags</summary>
-                <ul>
+                <ul className="z-[999]">
                   <TagList tags={tags} />
                 </ul>
               </details>
