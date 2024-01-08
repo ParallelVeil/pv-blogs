@@ -9,7 +9,7 @@ export default function Home() {
         <DateHandler>
             <div className="mx-auto">
                 <Profile/>
-                <Posts limit={8}/>
+                <Posts limit={5}/>
             </div>
         </DateHandler>
     )

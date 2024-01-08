@@ -5,13 +5,17 @@ type Props = {
 }
 
 export default function ListItem({ post }: Props) {
-    const { id, title, date } = post
+    const { id, title, date, tags } = post
 
     return (
         <li className="mt-4 text-2xl dark:text-white/90">
-            <Link className="underline hover:text-black/70 dark:hover:text-white" href={`/posts/${id}`}>{title}</Link>
-            <br />
-            <p className="text-sm mt-1"><span className={"formatDate"} data-time={date}>{date}</span></p>
+            <Link className="underline hover:text-black/70 dark:hover:text-white" 
+                href={`/posts/${id}`}>{title}</Link>
+            {tags.length > 0 ? 
+                tags.map(tag=><span className="badge badge-md" key={tag}>{tag}</span>):null}
+            <p className="text-sm">
+                <span className={"formatDate"} data-time={date}>{date}</span>
+            </p>
         </li>
     )
 }
