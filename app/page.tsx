@@ -1,5 +1,4 @@
 import Posts from "./components/Posts"
-import MyProfilePic from './about/components/ProfilePic'
 import DateHandler from "./context/DateContext"
 import Profile from "./about/components/Profile"
 
@@ -9,9 +8,8 @@ export default function Home() {
     return (
         <DateHandler>
             <div className="mx-auto">
-                <MyProfilePic/>
                 <Profile/>
-                <Posts limit={4}/>
+                <Posts limit={8}/>
             </div>
         </DateHandler>
     )
