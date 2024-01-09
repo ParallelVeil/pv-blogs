@@ -12,5 +12,6 @@ export default function useWatchTimeout(watch: unknown, ms: number, callback: ()
     return () => {
       timeOut && clearInterval(timeOut);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch]);
 }
