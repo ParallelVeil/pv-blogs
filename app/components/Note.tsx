@@ -1,6 +1,7 @@
 import React from 'react'
 import "./rehype-blockquote.css"
 import clsx from 'clsx';
+import Card from './Card';
 const containerClasses = 'tracking-tight -ml-4 -mr-4 px-5 py-4 sm:-ml-6 sm:-mr-6 sm:rounded-lg sm:shadow sm:px-2';
 const titleClasses = 'absolute -top-[27px] py-0 rounded-t leading-6 px-5 text-xs border-b-0 z-10 font-bold border-t-4 sm:left-0';
 
@@ -22,7 +23,7 @@ export function Note({
                      }: React.ComponentProps<'blockquote'> & Props) {
 
     if(SRS){
-        return <div>SSR{question}:{answer}</div>
+        return <Card question={question} answer={answer} />
     }
     if (!color) {
         return <blockquote>{children}</blockquote>
