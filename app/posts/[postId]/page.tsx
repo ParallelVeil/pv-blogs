@@ -27,15 +27,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params: { postId } }: Props) {
 
     const post = await getPostByName(`${postId}.mdx`) //deduped!
-
-    if (!post) {
-        return {
-            title: 'Post Not Found'
-        }
-    }
-
     return {
-        title: post.meta.title,
+        title: post? post.meta.title: 'Post Not Found',
     }
 }
 
