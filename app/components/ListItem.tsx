@@ -12,7 +12,7 @@ export default function ListItem({ post }: Props) {
             <Link className="underline hover:text-black/70 dark:hover:text-white" 
                 href={`/posts/${id}`}>{title}</Link>
             {tags.length > 0 ? 
-                tags.map(tag=><span className="badge badge-md" key={tag}>{tag}</span>):null}
+                tags.map(tag=><span className="badge badge-md" key={`listItem-${tag}`}>{tag}</span>):null}
             <p className="text-sm">
                 <span className={"formatDate"} data-time={date}>{date}</span>
             </p>

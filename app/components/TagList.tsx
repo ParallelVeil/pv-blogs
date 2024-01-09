@@ -18,9 +18,10 @@ export default function TagList({ tags }: { tags: string[] }) {
     return () => window.removeEventListener("click", dropdown_handler);
   }, []);
   return tags.map((tag) => (
-    <li key={tag}>
+    <li key={`tags-${tag}`}>
       <Link
         href={`/tags/${tag}`}
+        key={`link-${tag}`}
         onClick={(e) => document.getElementById("tags")?.click()}
       >
         {tag}
