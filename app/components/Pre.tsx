@@ -9,9 +9,9 @@ export function Pre({
 }: any) {
     return (
         <div className='relative my-0'>
-            <pre {...props} className={clsx('not-prose','mt-4',props.className)}>
+            <pre {...props} className={clsx('not-prose','mt-4 group',props.className)}>
                 {children}
-                <CopyButton text={raw} className={buttonClasses} />
+                <CopyButton text={raw} className={clsx(buttonClasses,'opacity-0 transition-all group-hover:opacity-100')} />
             </pre>
         </div>
     )

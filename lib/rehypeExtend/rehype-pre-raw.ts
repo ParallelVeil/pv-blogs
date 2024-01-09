@@ -1,7 +1,6 @@
 import {visit} from 'unist-util-visit'
 import {Node} from "unist";
 import {isElement} from "hast-util-is-element";
-import assert from "assert";
 
 export const preProcess = () => (tree: Node) => {
     visit(tree, 'element', (node: Node) => {
