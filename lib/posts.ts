@@ -39,7 +39,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
         components: {
             Video,
             CustomImage,
-            blockquote: Note,
+            blockquote: Note as React.ComponentType<React.ComponentProps<'blockquote'>>,
             pre: Pre as React.ComponentType<React.ComponentProps<'pre'>>,
             img: CustomImage as React.ComponentType<React.ComponentProps<'img'>>,
         },
