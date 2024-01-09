@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.icon,.icon-link{
+    @apply inline-block before:content-['🔗'];
+  }

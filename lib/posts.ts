@@ -54,7 +54,13 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
                     rehypeBlockquoteSRS,
                     rehypeSlug,
                     [rehypeAutolinkHeadings, {
-                        behavior: 'wrap'
+                        behavior: 'prepend',
+                        build: {
+                            type: 'element',
+                            tagName: 'span',
+                            properties: {className: ['icon', 'icon-link']},
+                            children: [],
+                        }
                     }],
                     postProcess,
                     // checkAST
