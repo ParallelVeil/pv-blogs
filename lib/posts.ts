@@ -34,15 +34,14 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
     const rawMDX = await res.text()
 
     if (rawMDX === '404: Not Found') return undefined
-    console.log(`render:${fileName}`)
     const {frontmatter, content} = await compileMDX<{ title: string, date: string, tags: string[] }>({
         source: rawMDX,
         components: {
             Video,
             CustomImage,
             blockquote: Note,
-            pre: Pre,
-            img: CustomImage,
+            pre: Pre as React.ComponentType<React.ComponentProps<'pre'>>,
+            img: CustomImage as React.ComponentType<React.ComponentProps<'img'>>,
         },
         options: {
             parseFrontmatter: true,
