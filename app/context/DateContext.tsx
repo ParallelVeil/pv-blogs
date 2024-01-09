@@ -3,12 +3,13 @@
 
 import {ReactNode, useEffect} from "react";
 import getFormattedDate from "@/lib/getFormattedDate";
-import { useRouter } from 'next/router';
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export default function DateHandler({children: children}: { children: ReactNode }) {
-    const router = useRouter();
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
     useEffect(() => {
-        const handleRouteChange = () => {
+        const handleRouteChange = async () => {
             const collectionOf = document.getElementsByClassName("formatDate");
             if (collectionOf.length > 0) {
               for (let i = 0; i < collectionOf.length; i++) {
@@ -19,13 +20,8 @@ export default function DateHandler({children: children}: { children: ReactNode 
               }
             }
           };
-      
-          router.events.on('routeChangeComplete', handleRouteChange);
-      
-          return () => {
-            router.events.off('routeChangeComplete', handleRouteChange);
-          };
-    }, [router.events]);
+        handleRouteChange();
+    }, [pathname, searchParams]);
 
     return <>
         {children}
