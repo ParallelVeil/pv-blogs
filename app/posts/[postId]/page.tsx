@@ -3,7 +3,6 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import 'highlight.js/styles/github-dark.css'
 import "@/app/components/rehype-code.css"
-import DateHandler from "@/app/context/DateContext"
 import RelatedTags from "./components/RelatedTags"
 import TimeReview from "./components/TimeView"
 
@@ -50,7 +49,7 @@ export default async function Post({ params: { postId } }: Props) {
     const pubDate = meta.date
     
     return (
-        <DateHandler>
+        <>
             <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
             <TimeReview postId={postId} pubDate={pubDate} />
             <article>
@@ -62,6 +61,6 @@ export default async function Post({ params: { postId } }: Props) {
             <p className="mb-10">
                 <Link href="/" className="not-prose link">Back to home</Link>
             </p>
-        </DateHandler>
+        </>
     )
 }
