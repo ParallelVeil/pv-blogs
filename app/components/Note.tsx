@@ -32,8 +32,8 @@ export function Note({
     const colorClass = `color-${color||'default'}`;
     return (
         <div className="relative my-24 w-full">
-            <div className={`${containerClasses} ${colorClass}`}>
-                {title ? <div className={clsx(titleClasses,colorClass)}>{title}</div> : null}
+            <div className={clsx(containerClasses, colorClass)}>
+                {title ? <div className={clsx(titleClasses, colorClass)}>{title}</div> : null}
                 <div className="p-3">
                     {children}
                 </div>
