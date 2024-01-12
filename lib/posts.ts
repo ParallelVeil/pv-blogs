@@ -43,7 +43,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
                 rehypePlugins: [
                     preProcess,
                     rehypeCodeTitles,
-                    [rehypePrism],
+                    rehypePrism,
                     rehypeBlockquote,
                     rehypeBlockquoteSRS,
                     rehypeSlug,
