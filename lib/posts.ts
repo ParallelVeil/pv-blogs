@@ -21,13 +21,7 @@ type Filetree = {
 }
 
 export async function getPostByName(fileName: string): Promise<BlogPost | undefined> {
-    const res = await fetch(process.env.POST?`${process.env.POST}/${fileName}`:`https://raw.githubusercontent.com/ishiko732/pv-raw-blogs/master/${fileName}`, {
-        headers: {
-            Accept: 'application/vnd.github+json',
-            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-            'X-GitHub-Api-Version': '2022-11-28',
-        }
-    })
+    const res = await getPostFetch(fileName)
 
     if (!res.ok) return undefined
 
@@ -80,13 +74,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
 }
 
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
-    const res = await fetch(process.env.POST || 'https://api.github.com/repos/ishiko732/pv-raw-blogs/git/trees/master?recursive=1', {
-        headers: {
-            Accept: 'application/vnd.github+json',
-            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-            'X-GitHub-Api-Version': '2022-11-28',
-        }
-    })
+    const res = await getPostsFetch()
 
     if (!res.ok) return undefined
 
@@ -113,4 +101,32 @@ export async function getPostTags():Promise<string[]> {
     if (!posts) return []
     const tags = new Set(posts.map(post => post.tags).flat())
     return Array.from(tags)
+}
+
+async function getPostsFetch() {
+    if (process.env.NODE_ENV === 'production') {
+        return await fetch('https://api.github.com/repos/ishiko732/pv-raw-blogs/git/trees/master?recursive=1', {
+            headers: {
+                Accept: 'application/vnd.github+json',
+                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                'X-GitHub-Api-Version': '2022-11-28',
+            }
+        })
+    } else {
+        return await fetch(process.env.POST||'http://localhost:4521/watch/github')
+    }
+}
+
+async function getPostFetch(fileName: string) {
+    if (process.env.NODE_ENV === 'production') {
+        return await fetch(`https://raw.githubusercontent.com/ishiko732/pv-raw-blogs/master/${fileName}`, {
+            headers: {
+                Accept: 'application/vnd.github+json',
+                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                'X-GitHub-Api-Version': '2022-11-28',
+            }
+        })
+    } else {
+        return await fetch(`${process.env.POST||'http://localhost:4521/watch/github'}/${fileName}`)
+    }
 }

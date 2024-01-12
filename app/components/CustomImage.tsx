@@ -9,8 +9,6 @@ type Props = {
 export default function CustomImage({src, alt, priority}: any) {
     if (src.startsWith("images/") || src.startsWith("/images/") || src.startsWith("./images/")) {
         if (process.env.DisabledImg === '1') {
-            src = `${process.env.POST}/images${src.replace(/^\.*\/?images\//, '/')}`;
-        } else {
             src = `http://localhost:3000/api/images${src.replace(/^\.*\/?images\//, '/')}`;
         }
     }
