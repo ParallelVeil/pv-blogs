@@ -26,6 +26,9 @@ function loadScheduleData(question: string): ScheduleRecord {
   const titleTag = document.querySelector("title")?.innerText || ""
   console.log(titleTag)
   const schedule = JSON.parse(localStorage.getItem("schedule") || JSON.stringify({ [titleTag]: {} })) as Schedule;
+  if(schedule[titleTag]===undefined){
+    schedule[titleTag] = {}
+  }
   if (schedule[titleTag][question] === undefined) {
     schedule[titleTag][question] = {
       card: createEmptyCard(dayjs().toDate()),
@@ -43,6 +46,9 @@ function storeSchedule(question: string, card: Card, rating: Rating): ScheduleRe
   const now = dayjs().toDate()
   const titleTag = document.querySelector("title")?.innerText || ""
   const schedule = JSON.parse(localStorage.getItem("schedule") || JSON.stringify({ [titleTag]: {} })) as Schedule;
+  if(schedule[titleTag]===undefined){
+    schedule[titleTag] = {}
+  }
   let recordItem;
   if (rating === Rating.Manual) {
     recordItem = f.forget(card, now);
@@ -101,6 +107,10 @@ function ShowAnswerButton({ question }: { question: string }) {
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [record.card])
+
+  useEffect(() => {
+
+  },[])
   return !open ? (
     <>
       {retrievability && (

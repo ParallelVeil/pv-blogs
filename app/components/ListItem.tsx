@@ -1,4 +1,5 @@
 import Link from "next/link"
+import DateItem from "./DateComponent"
 
 type Props = {
     post: Meta
@@ -14,7 +15,7 @@ export default function ListItem({ post }: Props) {
             {tags.length > 0 ? 
                 tags.map(tag=><span className="badge badge-md" key={`listItem-${tag}`}>{tag}</span>):null}
             <p className="text-sm">
-                <span className={"formatDate"} data-time={date}>{date}</span>
+                <DateItem date={date} />
             </p>
         </li>
     )
