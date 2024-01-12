@@ -11,7 +11,6 @@ import {postProcess, preProcess} from "@/lib/rehypeExtend/rehype-pre-raw";
 import {Pre} from "@/app/components/Pre";
 import rehypePrism from 'rehype-prism-plus'
 import rehypeBlockquoteSRS from "@/lib/rehypeExtend/rehype-blockquote-srs";
-import { Pluggable } from 'unified'
 
 type Filetree = {
     "tree": [
@@ -49,14 +48,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
                     rehypeBlockquoteSRS,
                     rehypeSlug,
                     [rehypeAutolinkHeadings, {
-                        behavior: 'prepend',
-                        build: {
-                            type: 'element',
-                            tagName: 'span',
-                            properties: {className: ['icon', 'icon-link']},
-                            children: [],
-                        },
-                        properties: {className: ['anchor']}
+                        properties: {className: ['anchor'],ariaLabel: 'anchor'},
                     }],
                     postProcess,
                     // checkAST

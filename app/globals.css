@@ -6,6 +6,17 @@
   @apply inline-block before:content-['🔗'];
 }
 
+.prose .anchor {
+  @apply absolute -ml-10 mt-1 flex h-6 w-6 items-center justify-center opacity-0 transition-all;
+  @apply rounded-md border-none no-underline ring-1 ring-neutral-700/10;
+  @apply hover:shadow hover:ring-neutral-700/30 dark:bg-neutral-700 dark:text-neutral-400;
+}
+
+.prose .anchor:hover,
+.prose *:hover > .anchor {
+  @apply md:opacity-100;
+}
+
 .color-slate {
   @apply bg-slate-50 border border-slate-200 text-slate-800;
 }
