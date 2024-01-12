@@ -12,6 +12,8 @@ import {Pre} from "@/app/components/Pre";
 import rehypePrism from 'rehype-prism-plus'
 import rehypeBlockquoteSRS from "@/lib/rehypeExtend/rehype-blockquote-srs";
 import readingTime from 'reading-time';
+import remarkGfm from 'remark-gfm';
+import remarkToc from 'remark-toc';
 
 type Filetree = {
     "tree": [
@@ -42,6 +44,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
         options: {
             parseFrontmatter: true,
             mdxOptions: {
+                remarkPlugins: [remarkToc, remarkGfm,],
                 rehypePlugins: [
                     preProcess,
                     rehypeCodeTitles,
