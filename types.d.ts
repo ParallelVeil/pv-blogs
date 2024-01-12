@@ -4,6 +4,7 @@ type Meta = {
     title: string,
     date: string,
     tags: string[],
+    read: number
 }
 
 type BlogPost = {

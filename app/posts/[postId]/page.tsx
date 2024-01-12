@@ -44,7 +44,7 @@ export default async function Post({ params: { postId } }: Props) {
     return (
         <>
             <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
-            <TimeReview postId={postId} pubDate={pubDate} />
+            <TimeReview postId={postId} pubDate={pubDate} readTime={meta.read} />
             <article>
                 {content}
             </article>

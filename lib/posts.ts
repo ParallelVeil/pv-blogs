@@ -11,6 +11,7 @@ import {postProcess, preProcess} from "@/lib/rehypeExtend/rehype-pre-raw";
 import {Pre} from "@/app/components/Pre";
 import rehypePrism from 'rehype-prism-plus'
 import rehypeBlockquoteSRS from "@/lib/rehypeExtend/rehype-blockquote-srs";
+import readingTime from 'reading-time';
 
 type Filetree = {
     "tree": [
@@ -28,6 +29,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
     const rawMDX = await res.text()
 
     if (rawMDX === '404: Not Found') return undefined
+    
     const {frontmatter, content} = await compileMDX<{ title: string, date: string, tags: string[] }>({
         source: rawMDX,
         components: {
@@ -56,11 +58,10 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
             },
         }
     })
-
     const id = fileName.replace(/\.mdx$/, '')
-
+    const read = Math.ceil(readingTime(rawMDX).minutes)
     const blogPostObj: BlogPost = {
-        meta: {id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags},
+        meta: {id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags, read},
         content
     }
 
